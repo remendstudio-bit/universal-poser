@@ -228,9 +228,9 @@ function crearPlanoReferencia(){
 
     const grid = new THREE.GridHelper(
 
-        10,
+        30,
 
-        20,
+        60,
 
         0xffffff,
 
