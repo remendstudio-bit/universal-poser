@@ -31,6 +31,8 @@ let puntoSeleccionado = null;
 
 let controlesRotacion = [];
 
+let planoReferencia = null;
+
 let ejeSeleccionado = null;
 
 let arrastrando = false;
@@ -220,6 +222,59 @@ escena.add(
     luzDireccion
 );
 
+
+function crearPlanoReferencia(){
+
+
+    const grid = new THREE.GridHelper(
+
+        10,
+
+        20,
+
+        0xffffff,
+
+        0x555555
+
+    );
+
+
+    grid.position.y = 0;
+
+
+    grid.material.transparent = true;
+
+    grid.material.opacity = 0.35;
+
+
+    escena.add(grid);
+
+
+
+    const ejes = new THREE.AxesHelper(
+
+        3
+
+    );
+
+
+    ejes.position.y = 0.01;
+
+
+    escena.add(ejes);
+
+
+
+    planoReferencia = {
+
+        grid:grid,
+
+        ejes:ejes
+
+    };
+
+
+}
 
 
 // CARGAR GLB
@@ -1494,6 +1549,8 @@ botonReset.addEventListener(
 
 
 // INICIAR PROGRAMA
+
+crearPlanoReferencia();
 
 animar();
 
