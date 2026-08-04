@@ -4,6 +4,7 @@ import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/exampl
 
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 
+
 // CANVAS
 
 const canvas =
@@ -11,11 +12,15 @@ document.getElementById(
     "visor3D"
 );
 
+
+// CARGADOR
+
 const loader =
 new GLTFLoader();
 
 
 let modeloActual = null;
+
 
 const inputGLB =
 document.getElementById(
@@ -27,6 +32,7 @@ document.getElementById(
 
 const escena =
 new THREE.Scene();
+
 
 escena.background =
 new THREE.Color(
@@ -47,7 +53,7 @@ new THREE.PerspectiveCamera(
 
     0.1,
 
-    1000
+    2000
 
 );
 
@@ -58,51 +64,9 @@ camara.position.set(
     5
 );
 
-camara.lookAt(
-    0,
-    0,
-    0
-);
 
 
-// CONTROLES DE CÁMARA
-
-const controles =
-new OrbitControls(
-
-    camara,
-
-    canvas
-
-);
-
-
-controles.enableRotate = true;
-
-controles.enableZoom = true;
-
-controles.enablePan = true;
-
-controles.enableDamping = true;
-
-controles.dampingFactor = 0.08;
-
-
-controles.target.set(
-
-    0,
-
-    1,
-
-    0
-
-);
-
-
-controles.update();
-
-
-// RENDERER
+// RENDER
 
 const render =
 new THREE.WebGLRenderer({
@@ -129,44 +93,26 @@ render.setSize(
 
 
 
-// PRIMER OBJETO DE PRUEBA
+// CONTROLES
 
-const geometria =
-new THREE.BoxGeometry(
-    1,
-    1,
-    1
-);
+const controles =
+new OrbitControls(
 
+    camara,
 
-const material =
-new THREE.MeshStandardMaterial({
-
-    color:0x00ff00,
-
-    roughness:0.6,
-
-    metalness:0.1
-
-});
-
-
-const cubo =
-new THREE.Mesh(
-
-    geometria,
-
-    material
+    canvas
 
 );
 
 
-cubo.position.y = 1;
+controles.enableDamping = true;
+
+controles.dampingFactor = 0.08;
 
 
-// escena.add(cubo);
 
 // ILUMINACIÓN
+
 
 const luzAmbiente =
 new THREE.HemisphereLight(
@@ -178,6 +124,7 @@ new THREE.HemisphereLight(
     2
 
 );
+
 
 escena.add(
     luzAmbiente
@@ -212,8 +159,7 @@ escena.add(
 
 
 
-
-// CARGAR MODELO GLB
+// CARGAR GLB
 
 
 inputGLB.addEventListener(
@@ -242,6 +188,7 @@ loader.load(
 
 ruta,
 
+
 (resultado)=>{
 
 
@@ -261,12 +208,12 @@ resultado.scene;
 
 
 escena.add(
-modeloActual
+    modeloActual
 );
 
 
 
-// CENTRAR MODELO
+// MEDIR MODELO
 
 const caja =
 new THREE.Box3()
@@ -290,14 +237,33 @@ caja.getSize(
 
 
 
-modeloActual.position.x -= centro.x;
+// CENTRAR MODELO
 
-modeloActual.position.y -= centro.y;
+modeloActual.position.sub(
+    centro
+);
 
-modeloActual.position.z -= centro.z;
 
 
-// AJUSTAR CÁMARA
+// NUEVA MEDICIÓN
+
+const cajaNueva =
+new THREE.Box3()
+.setFromObject(
+    modeloActual
+);
+
+
+
+const centroNuevo =
+cajaNueva.getCenter(
+    new THREE.Vector3()
+);
+
+
+
+// CÁMARA
+
 
 const maximo =
 Math.max(
@@ -316,22 +282,16 @@ camara.position.set(
 
     0,
 
-    maximo * 0.5,
+    maximo * 0.6,
 
-    maximo * 2
+    maximo * 2.2
 
 );
 
 
 
-controles.target.set(
-
-    0,
-
-    0,
-
-    0
-
+controles.target.copy(
+    centroNuevo
 );
 
 
@@ -340,7 +300,8 @@ controles.update();
 
 
 console.log(
-"Modelo cargado correctamente"
+"Modelo cargado:",
+modeloActual.name
 );
 
 
@@ -368,28 +329,30 @@ error
 
 
 
+
 // ANIMACIÓN
+
 
 function animar(){
 
-    requestAnimationFrame(
-        animar
-    );
+requestAnimationFrame(
+    animar
+);
 
 
-    cubo.rotation.y += 0.01;
+
+controles.update();
 
 
-    controles.update();
 
+render.render(
 
-    render.render(
+    escena,
 
-        escena,
+    camara
 
-        camara
+);
 
-    );
 
 }
 
@@ -399,7 +362,9 @@ animar();
 
 
 
-// AJUSTE DE PANTALLA
+
+// RESIZE
+
 
 window.addEventListener(
 
@@ -413,6 +378,7 @@ camara.aspect =
 window.innerWidth /
 
 window.innerHeight;
+
 
 
 camara.updateProjectionMatrix();
