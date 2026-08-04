@@ -1018,19 +1018,23 @@ canvas.addEventListener(
 ()=>{
 
 
-arrastrando = false;
+    arrastrando = false;
 
 
-
-ejeSeleccionado = null;
-
+    ejeSeleccionado = null;
 
 
-controles.enabled = true;
+    if(!camaraBloqueada){
+
+        controles.enabled = true;
+
+    }
 
 
 }
+
 );
+
 
 botonCamara.addEventListener(
 
