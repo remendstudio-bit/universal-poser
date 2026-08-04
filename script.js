@@ -714,16 +714,6 @@ function guardarEstado(){
 }
 
 
-function guardarEstado(){
-
-
-    // todo tu código de guardarEstado
-
-
-}
-
-
-
 function guardarPoseInicial(){
 
 
