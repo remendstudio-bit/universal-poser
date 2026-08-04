@@ -672,6 +672,9 @@ material
 circulo.renderOrder = 1000;
 
 
+circulo.userData.eje = i;
+
+
 if(i === 0){
 
 circulo.rotation.y =
