@@ -1,5 +1,7 @@
 import * as THREE from "three";
 
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
 
 // CANVAS
 
@@ -49,6 +51,37 @@ camara.lookAt(
     0,
     0
 );
+
+
+// CONTROLES DE CÁMARA
+
+const controles =
+new OrbitControls(
+
+    camara,
+
+    render.domElement
+
+);
+
+
+controles.enableDamping = true;
+
+controles.dampingFactor = 0.08;
+
+
+controles.target.set(
+
+    0,
+
+    1,
+
+    0
+
+);
+
+
+controles.update();
 
 
 // RENDERER
@@ -184,6 +217,9 @@ function animar(){
 
 
     cubo.rotation.y += 0.01;
+
+
+    controles.update();
 
 
     render.render(
