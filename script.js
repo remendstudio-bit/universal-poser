@@ -577,6 +577,11 @@ punto.position.copy(
 );
 
 
+console.log(
+hueso.name,
+posicion
+);
+
 
 }
 
