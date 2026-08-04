@@ -164,9 +164,7 @@ new THREE.Mesh(
 cubo.position.y = 1;
 
 
-escena.add(
-    cubo
-);
+// escena.add(cubo);
 
 // ILUMINACIÓN
 
