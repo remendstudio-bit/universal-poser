@@ -580,18 +580,47 @@ punto.position.copy(
 );
 
 
-console.log(
-hueso.userData.hueso.name,
-posicion
-);
-
-
 }
 
 );
 
 
 }
+
+
+
+
+
+// ANIMACIÓN
+
+
+function animar(){
+
+requestAnimationFrame(
+    animar
+);
+
+
+
+actualizarPuntos();
+
+
+
+controles.update();
+
+
+
+render.render(
+
+escena,
+
+camara
+
+);
+
+
+}
+
 
 animar();
 
