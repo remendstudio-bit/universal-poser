@@ -30,10 +30,6 @@ let puntosHuesos = [];
 let huesosUsables = [];
 
 
-let huesoSeleccionado = null;
-let puntoSeleccionado = null;
-
-
 const inputGLB =
 document.getElementById(
     "archivoGLB"
