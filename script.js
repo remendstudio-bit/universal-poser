@@ -613,25 +613,17 @@ function actualizarPuntos(){
 
 function eliminarControlesRotacion(){
 
+    controlesRotacion.forEach((control)=>{
 
-    controlesRotacion.forEach(
+        escena.remove(control.visible);
 
-        (circulo)=>{
+        escena.remove(control.touch);
 
-            escena.remove(
-                circulo
-            );
-
-        }
-
-    );
-
+    });
 
     controlesRotacion = [];
 
-
 }
-
 
 
 function crearControlesRotacion(hueso){
@@ -650,122 +642,106 @@ function crearControlesRotacion(hueso){
 
     ];
 
-    for(let i = 0; i < 3; i++){
+    for(let i=0;i<3;i++){
 
+        //------------------------------------
         // CÍRCULO VISIBLE
+        //------------------------------------
 
-        const geometria =
-        new THREE.TorusGeometry(
+        const circulo = new THREE.Mesh(
 
-            tamaño,
+            new THREE.TorusGeometry(
 
-            0.03,
+                tamaño,
 
-            16,
+                0.03,
 
-            64
+                16,
 
-        );
+                64
 
-        const material =
-        new THREE.MeshBasicMaterial({
+            ),
 
-            color: colores[i],
+            new THREE.MeshBasicMaterial({
 
-            depthTest:false
+                color:colores[i],
 
-        });
+                depthTest:false
 
-        const circulo =
-        new THREE.Mesh(
-
-            geometria,
-
-            material
+            })
 
         );
 
         circulo.renderOrder = 1000;
 
-        circulo.userData.eje = i;
+        if(i===0){
 
-        // ORIENTACIÓN DEL CÍRCULO
-
-        if(i === 0){
-
-            circulo.rotation.y = Math.PI / 2;
+            circulo.rotation.y=Math.PI/2;
 
         }
 
-        if(i === 1){
+        if(i===1){
 
-            circulo.rotation.x = Math.PI / 2;
+            circulo.rotation.x=Math.PI/2;
 
         }
 
-        // ÁREA TÁCTIL (INVISIBLE)
+        //------------------------------------
+        // ÁREA TÁCTIL
+        //------------------------------------
 
-        const geometriaTouch =
-        new THREE.TorusGeometry(
+        const touch = new THREE.Mesh(
 
-            tamaño,
+            new THREE.TorusGeometry(
 
-            0.12,
+                tamaño,
 
-            16,
+                0.12,
 
-            64
+                16,
 
-        );
+                64
 
-        const materialTouch =
-        new THREE.MeshBasicMaterial({
+            ),
 
-            transparent:true,
+            new THREE.MeshBasicMaterial({
 
-            opacity:0
+                transparent:true,
 
-        });
+                opacity:0
 
-        const touch =
-        new THREE.Mesh(
-
-            geometriaTouch,
-
-            materialTouch
+            })
 
         );
-
-        // COPIAR LA MISMA ORIENTACIÓN
 
         touch.rotation.copy(
+
             circulo.rotation
+
         );
 
-        touch.userData.eje = i;
+        touch.userData.eje=i;
 
-        touch.userData.visible = circulo;
+        //------------------------------------
 
-        // AGREGAR AMBOS A LA ESCENA
+        escena.add(circulo);
 
-        escena.add(
-            circulo
-        );
+        escena.add(touch);
 
-        escena.add(
-            touch
-        );
+        controlesRotacion.push({
 
-        // SOLO EL INVISIBLE SE USA PARA DETECTAR TOQUES
+            visible:circulo,
 
-        controlesRotacion.push(
-            touch
-        );
+            touch:touch
+
+        });
 
     }
 
     actualizarControlesRotacion(
+
         hueso
+
     );
 
 }
@@ -806,37 +782,31 @@ actualizarControlesRotacion(hueso);
 
 function actualizarControlesRotacion(hueso){
 
+    if(!hueso) return;
 
-if(!hueso) return;
+    const posicion=new THREE.Vector3();
 
+    hueso.getWorldPosition(
 
+        posicion
 
-const posicion =
-new THREE.Vector3();
+    );
 
+    controlesRotacion.forEach((control)=>{
 
+        control.visible.position.copy(
 
-hueso.getWorldPosition(
-posicion
-);
+            posicion
 
+        );
 
+        control.touch.position.copy(
 
-controlesRotacion.forEach(
+            posicion
 
-(touch)=>{
+        );
 
-touch.position.copy(
-posicion
-);
-
-touch.userData.visible.position.copy(
-posicion
-);
-
-}
-);
-
+    });
 
 }
 
@@ -894,7 +864,13 @@ canvas.addEventListener(
 
     const impactosCirculos =
 raycaster.intersectObjects(
-    controlesRotacion
+
+    controlesRotacion.map(
+
+        control=>control.touch
+
+    )
+
 );
 
 
