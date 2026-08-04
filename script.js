@@ -39,6 +39,8 @@ let ultimoX = 0;
 
 let ultimoY = 0;
 
+let camaraBloqueada = false;
+
 
 const inputGLB =
 document.getElementById(
@@ -122,6 +124,11 @@ new OrbitControls(
 
 );
 
+
+const botonCamara =
+document.getElementById(
+    "botonCamara"
+);
 
 controles.enableDamping = true;
 
@@ -1024,6 +1031,41 @@ controles.enabled = true;
 
 }
 );
+
+botonCamara.addEventListener(
+
+"click",
+
+()=>{
+
+
+camaraBloqueada =
+!camaraBloqueada;
+
+
+
+controles.enabled =
+!camaraBloqueada;
+
+
+
+if(camaraBloqueada){
+
+botonCamara.textContent =
+"🔓 Desbloquear cámara";
+
+}else{
+
+botonCamara.textContent =
+"🔒 Bloquear cámara";
+
+}
+
+
+}
+
+);
+
 
 
 // INICIAR PROGRAMA
