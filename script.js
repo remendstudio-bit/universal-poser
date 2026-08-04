@@ -290,10 +290,11 @@ caja.getSize(
 
 
 
-modeloActual.position.sub(
-    centro
-);
+modeloActual.position.x -= centro.x;
 
+modeloActual.position.y -= centro.y;
+
+modeloActual.position.z -= centro.z;
 
 
 // AJUSTAR CÁMARA
