@@ -60,10 +60,16 @@ new OrbitControls(
 
     camara,
 
-    render.domElement
+    canvas
 
 );
 
+
+controles.enableRotate = true;
+
+controles.enableZoom = true;
+
+controles.enablePan = true;
 
 controles.enableDamping = true;
 
