@@ -263,8 +263,80 @@ resultado.scene;
 
 
 escena.add(
+modeloActual
+);
+
+
+
+// CENTRAR MODELO
+
+const caja =
+new THREE.Box3()
+.setFromObject(
     modeloActual
 );
+
+
+
+const centro =
+caja.getCenter(
+    new THREE.Vector3()
+);
+
+
+
+const tamaño =
+caja.getSize(
+    new THREE.Vector3()
+);
+
+
+
+modeloActual.position.sub(
+    centro
+);
+
+
+
+// AJUSTAR CÁMARA
+
+const maximo =
+Math.max(
+
+    tamaño.x,
+
+    tamaño.y,
+
+    tamaño.z
+
+);
+
+
+
+camara.position.set(
+
+    0,
+
+    maximo * 0.5,
+
+    maximo * 2
+
+);
+
+
+
+controles.target.set(
+
+    0,
+
+    0,
+
+    0
+
+);
+
+
+controles.update();
 
 
 
