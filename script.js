@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 
 // CANVAS
 
@@ -9,6 +10,12 @@ const canvas =
 document.getElementById(
     "visor3D"
 );
+
+const loader =
+new GLTFLoader();
+
+
+let modeloActual = null;
 
 
 // ESCENA
@@ -200,16 +207,7 @@ escena.add(
     luzDireccion
 );
 
-cubo.position.set(
-    0,
-    0,
-    0
-);
 
-
-escena.add(
-    cubo
-);
 
 
 
