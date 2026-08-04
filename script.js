@@ -747,39 +747,6 @@ function crearControlesRotacion(hueso){
 }
 
 
-if(i === 1){
-
-circulo.rotation.x =
-Math.PI / 2;
-
-}
-
-
-circulo.userData.eje =
-i;
-
-
-
-escena.add(
-circulo
-);
-
-
-
-controlesRotacion.push(
-circulo
-);
-
-
-}
-
-
-actualizarControlesRotacion(hueso);
-
-
-}
-
-
 function actualizarControlesRotacion(hueso){
 
     if(!hueso) return;
