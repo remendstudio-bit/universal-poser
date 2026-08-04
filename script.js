@@ -950,7 +950,7 @@ switch(ejeSeleccionado){
 
 case 0:
 
-huesoSeleccionado.rotation.x += deltaX * 0.01;
+console.log(huesoSeleccionado);
 
 break;
 
