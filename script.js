@@ -558,48 +558,60 @@ function actualizarPuntos(){
     if(!modeloActual) return;
 
 
-
-    modeloActual.updateMatrixWorld(
-        true
-    );
+    modeloActual.updateMatrixWorld(true);
 
 
-
-    puntosHuesos.forEach(
-
-        (punto)=>{
+    puntosHuesos.forEach((punto)=>{
 
 
-            const posicion =
-            new THREE.Vector3();
+        const posicion =
+        new THREE.Vector3();
+
+
+        punto.userData.hueso.getWorldPosition(
+            posicion
+        );
+
+
+        punto.position.copy(
+            posicion
+        );
+
+
+    });
+
+
+}
 
 
 
-            punto.userData.hueso.getWorldPosition(
+function eliminarControlesRotacion(){
 
-                posicion
 
+    controlesRotacion.forEach(
+
+        (circulo)=>{
+
+            escena.remove(
+                circulo
             );
-
-
-
-            punto.position.copy(
-                posicion
-            );
-
 
         }
 
     );
 
 
+    controlesRotacion = [];
+
+
 }
+
 
 
 function crearControlesRotacion(hueso){
 
 
-eliminarControlesRotacion();
+    eliminarControlesRotacion();
 
 
 const tamaño = 0.5;
@@ -819,14 +831,20 @@ canvas.addEventListener(
 
 
         huesoSeleccionado =
-        punto.userData.hueso;
+punto.userData.hueso;
 
 
 
-        console.log(
-            "Hueso seleccionado:",
-            huesoSeleccionado.name
-        );
+console.log(
+    "Hueso seleccionado:",
+    huesoSeleccionado.name
+);
+
+
+
+crearControlesRotacion(
+    huesoSeleccionado
+);
 
 
     }
