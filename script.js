@@ -35,6 +35,8 @@ let ejeSeleccionado = null;
 
 let arrastrando = false;
 
+let modoMover = false;
+
 let ultimoX = 0;
 
 let ultimoY = 0;
@@ -627,6 +629,38 @@ function actualizarPuntos(){
 }
 
 
+function mostrarControlesHuesos(valor){
+
+
+    puntosHuesos.forEach(
+
+        (punto)=>{
+
+            punto.visible = valor;
+
+        }
+
+    );
+
+
+    controlesRotacion.forEach(
+
+        (control)=>{
+
+
+            control.visible.visible = valor;
+
+
+            control.touch.visible = valor;
+
+
+        }
+
+    );
+
+
+}
+
 
 function eliminarControlesRotacion(){
 
@@ -1087,41 +1121,39 @@ botonMover.addEventListener(
 ()=>{
 
 
-modoMover =
-!modoMover;
+    modoMover = !modoMover;
 
 
 
-if(modoMover){
+    if(modoMover){
 
 
-    controles.enabled = false;
+        controles.enabled = false;
 
 
-    botonMover.textContent = "✥";
+        mostrarControlesHuesos(false);
 
 
-    console.log(
-        "Modo mover activado"
-    );
+        console.log(
+            "Modo mover activado"
+        );
 
 
-}else{
+    }else{
 
-
-    if(!camaraBloqueada){
 
         controles.enabled = true;
 
+
+        mostrarControlesHuesos(true);
+
+
+        console.log(
+            "Modo mover desactivado"
+        );
+
+
     }
-
-
-    console.log(
-        "Modo mover desactivado"
-    );
-
-
-}
 
 
 }
