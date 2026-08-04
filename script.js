@@ -880,6 +880,10 @@ if(impactosCirculos.length > 0){
 
 
 
+    controles.enabled = false;
+
+
+
     ultimoX =
     evento.clientX;
 
@@ -982,9 +986,17 @@ canvas.addEventListener(
 
 ()=>{
 
+
 arrastrando = false;
 
+
+
 ejeSeleccionado = null;
+
+
+
+controles.enabled = true;
+
 
 }
 );
