@@ -40,8 +40,8 @@ new THREE.PerspectiveCamera(
 
 camara.position.set(
     0,
-    1,
-    3
+    0,
+    5
 );
 
 
@@ -99,6 +99,7 @@ new THREE.Mesh(
     material
 
 );
+cubo.position.y = 0;
 
 
 escena.add(
