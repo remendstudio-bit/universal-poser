@@ -29,6 +29,8 @@ let huesoSeleccionado = null;
 
 let puntoSeleccionado = null;
 
+let controlesRotacion = [];
+
 
 const inputGLB =
 document.getElementById(
@@ -593,6 +595,146 @@ function actualizarPuntos(){
 
 }
 
+
+function crearControlesRotacion(hueso){
+
+
+eliminarControlesRotacion();
+
+
+const tamaño = 0.5;
+
+
+
+const colores = [
+
+0xff0000,
+
+0x00ff00,
+
+0x0000ff
+
+];
+
+
+for(let i = 0; i < 3; i++){
+
+
+const geometria =
+new THREE.TorusGeometry(
+
+tamaño,
+
+0.01,
+
+16,
+
+64
+
+);
+
+
+
+const material =
+new THREE.MeshBasicMaterial({
+
+color: colores[i],
+
+depthTest:false
+
+});
+
+
+
+const circulo =
+new THREE.Mesh(
+
+geometria,
+
+material
+
+);
+
+
+
+circulo.renderOrder = 1000;
+
+
+if(i === 0){
+
+circulo.rotation.y =
+Math.PI / 2;
+
+}
+
+
+if(i === 1){
+
+circulo.rotation.x =
+Math.PI / 2;
+
+}
+
+
+circulo.userData.eje =
+i;
+
+
+
+escena.add(
+circulo
+);
+
+
+
+controlesRotacion.push(
+circulo
+);
+
+
+}
+
+
+actualizarControlesRotacion(hueso);
+
+
+}
+
+
+function actualizarControlesRotacion(hueso){
+
+
+if(!hueso) return;
+
+
+
+const posicion =
+new THREE.Vector3();
+
+
+
+hueso.getWorldPosition(
+posicion
+);
+
+
+
+controlesRotacion.forEach(
+
+(circulo)=>{
+
+
+circulo.position.copy(
+posicion
+);
+
+
+}
+
+);
+
+
+}
 
 
 // SELECCIÓN DE HUESOS
