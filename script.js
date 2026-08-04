@@ -44,6 +44,11 @@ camara.position.set(
     5
 );
 
+camara.lookAt(
+    0,
+    0,
+    0
+);
 
 
 // RENDERER
@@ -99,7 +104,11 @@ new THREE.Mesh(
     material
 
 );
-cubo.position.y = 0;
+cubo.position.set(
+    0,
+    0,
+    0
+);
 
 
 escena.add(
