@@ -460,7 +460,7 @@ nombre.includes("proximal")
 
 ){
 
-tamañoPunto = 0.08;
+tamañoPunto = 0.05;
 
 }
 
