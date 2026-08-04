@@ -902,6 +902,94 @@ if(impactosCirculos.length > 0){
 });
 
 
+
+canvas.addEventListener(
+
+"pointermove",
+
+(evento)=>{
+
+
+if(
+
+!arrastrando ||
+
+!huesoSeleccionado ||
+
+ejeSeleccionado === null
+
+){
+
+return;
+
+}
+
+
+
+const deltaX =
+evento.clientX - ultimoX;
+
+
+
+const deltaY =
+evento.clientY - ultimoY;
+
+
+
+ultimoX =
+evento.clientX;
+
+
+
+ultimoY =
+evento.clientY;
+
+
+
+switch(ejeSeleccionado){
+
+case 0:
+
+console.log("Moviendo eje X");
+
+break;
+
+
+case 1:
+
+console.log("Moviendo eje Y");
+
+break;
+
+
+case 2:
+
+console.log("Moviendo eje Z");
+
+break;
+
+}
+
+
+}
+
+);
+
+
+canvas.addEventListener(
+
+"pointerup",
+
+()=>{
+
+arrastrando = false;
+
+ejeSeleccionado = null;
+
+}
+);
+
+
 // INICIAR PROGRAMA
 
 animar();
