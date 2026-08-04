@@ -31,6 +31,14 @@ let puntoSeleccionado = null;
 
 let controlesRotacion = [];
 
+let ejeSeleccionado = null;
+
+let arrastrando = false;
+
+let ultimoX = 0;
+
+let ultimoY = 0;
+
 
 const inputGLB =
 document.getElementById(
