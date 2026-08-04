@@ -1056,12 +1056,12 @@ controles.enabled =
 if(camaraBloqueada){
 
 botonCamara.textContent =
-"🔓 Desbloquear cámara";
+"🔓";
 
 }else{
 
 botonCamara.textContent =
-"🔒 Bloquear cámara";
+"🔒";
 
 }
 
