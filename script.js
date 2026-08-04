@@ -17,6 +17,11 @@ new GLTFLoader();
 
 let modeloActual = null;
 
+const inputGLB =
+document.getElementById(
+    "archivoGLB"
+);
+
 
 // ESCENA
 
@@ -207,6 +212,87 @@ escena.add(
     luzDireccion
 );
 
+
+
+
+// CARGAR MODELO GLB
+
+
+inputGLB.addEventListener(
+
+"change",
+
+(evento)=>{
+
+
+const archivo =
+evento.target.files[0];
+
+
+if(!archivo) return;
+
+
+
+const ruta =
+URL.createObjectURL(
+    archivo
+);
+
+
+
+loader.load(
+
+ruta,
+
+(resultado)=>{
+
+
+if(modeloActual){
+
+escena.remove(
+    modeloActual
+);
+
+}
+
+
+
+modeloActual =
+resultado.scene;
+
+
+
+escena.add(
+    modeloActual
+);
+
+
+
+console.log(
+"Modelo cargado correctamente"
+);
+
+
+
+},
+
+
+undefined,
+
+
+(error)=>{
+
+console.error(
+error
+);
+
+}
+
+
+);
+
+
+});
 
 
 
