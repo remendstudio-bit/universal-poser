@@ -20,6 +20,8 @@ body{
 
 
 
+/* VISOR 3D */
+
 #visor3D{
 
     position:fixed;
@@ -38,25 +40,118 @@ body{
 
 
 
-#interfaz{
+/* PRESENTACIÓN */
 
-    position:absolute;
+#pantallaInicio{
+
+    position:fixed;
 
     top:20px;
 
     left:20px;
 
-    z-index:10;
+    z-index:100;
 
-    background:rgba(30,30,30,0.8);
 
-    padding:15px;
+    background:rgba(30,30,30,0.85);
 
-    border-radius:10px;
+    padding:15px 20px;
+
+    border-radius:14px;
+
 
     color:white;
 
+
+    backdrop-filter:blur(5px);
+
+
+    animation:entradaInicio 0.6s ease;
+
 }
+
+
+
+/* ICONO COCODRILO */
+
+#pantallaInicio .logo{
+
+    font-size:40px;
+
+    text-align:center;
+
+    margin-bottom:5px;
+
+}
+
+
+
+/* TITULO */
+
+#pantallaInicio h1{
+
+    margin:0;
+
+    font-size:24px;
+
+    letter-spacing:2px;
+
+}
+
+
+
+/* DESCRIPCIÓN */
+
+#pantallaInicio p{
+
+    margin:5px 0;
+
+    font-size:15px;
+
+    opacity:0.8;
+
+}
+
+
+
+/* VERSION Y AUTOR */
+
+#pantallaInicio span{
+
+    font-size:13px;
+
+    opacity:0.6;
+
+}
+
+
+
+/* ANIMACIÓN */
+
+@keyframes entradaInicio{
+
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-20px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+
+}
+
+
 
 
 
@@ -71,6 +166,7 @@ body{
     left:20px;
 
     z-index:20;
+
 
     display:flex;
 
@@ -94,11 +190,14 @@ body{
 
     border:none;
 
+
     background:#333;
 
     color:white;
 
+
     font-size:26px;
+
 
     cursor:pointer;
 
