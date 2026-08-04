@@ -321,7 +321,7 @@ function crearPunto(hueso){
 const geometria =
 new THREE.SphereGeometry(
 
-0.035,
+0.08,
 
 16,
 
@@ -547,10 +547,19 @@ puntosHuesos.forEach(
 (punto)=>{
 
 
+const posicion =
+new THREE.Vector3();
+
+
 punto.userData.hueso.getWorldPosition(
 
-punto.position
+posicion
 
+);
+
+
+punto.position.copy(
+posicion
 );
 
 
