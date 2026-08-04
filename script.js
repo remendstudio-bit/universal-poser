@@ -41,6 +41,13 @@ let ultimoX = 0;
 
 let ultimoY = 0;
 
+
+let moviendoModelo = false;
+
+let ultimoMoverX = 0;
+
+let ultimoMoverY = 0;
+
 let camaraBloqueada = false;
 
 let ultimoMovimientoX = 0;
@@ -845,6 +852,24 @@ canvas.addEventListener(
 (evento)=>{
 
 
+    if(modoMover){
+
+
+        moviendoModelo = true;
+
+
+        ultimoMoverX = evento.clientX;
+
+
+        ultimoMoverY = evento.clientY;
+
+
+        return;
+
+    }
+
+
+
     const rect =
     canvas.getBoundingClientRect();
 
@@ -985,6 +1010,41 @@ canvas.addEventListener(
 "pointermove",
 
 (evento)=>{
+
+
+if(modoMover && moviendoModelo){
+
+
+    const deltaX =
+    evento.clientX - ultimoMoverX;
+
+
+    const deltaY =
+    evento.clientY - ultimoMoverY;
+
+
+    ultimoMoverX =
+    evento.clientX;
+
+
+    ultimoMoverY =
+    evento.clientY;
+
+
+
+    if(modeloActual){
+
+        modeloActual.position.x += deltaX * 0.005;
+
+        modeloActual.position.y -= deltaY * 0.005;
+
+    }
+
+
+    return;
+
+}
+
 
 
 if(
