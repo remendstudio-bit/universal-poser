@@ -524,6 +524,8 @@ requestAnimationFrame(
 );
 
 
+actualizarPuntos();
+
 
 
 controles.update();
@@ -537,7 +539,6 @@ escena,
 camara
 
 );
-
 
 }
 
@@ -578,7 +579,7 @@ punto.position.copy(
 
 
 console.log(
-hueso.name,
+hueso.userData.hueso.name,
 posicion
 );
 
