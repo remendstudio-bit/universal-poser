@@ -212,6 +212,41 @@ escena.add(
 );
 
 
+    // BUSCAR HUESOS
+
+let cantidadHuesos = 0;
+
+
+modeloActual.traverse(
+
+(objeto)=>{
+
+
+if(
+objeto.isSkinnedMesh &&
+objeto.skeleton
+){
+
+
+cantidadHuesos +=
+objeto.skeleton.bones.length;
+
+
+}
+
+
+}
+
+
+);
+
+
+
+console.log(
+"Huesos encontrados:",
+cantidadHuesos
+);
+
 
 // MEDIR MODELO
 
