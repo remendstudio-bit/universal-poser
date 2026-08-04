@@ -89,9 +89,13 @@ new THREE.BoxGeometry(
 
 
 const material =
-new THREE.MeshBasicMaterial({
+new THREE.MeshStandardMaterial({
 
-    color:0x00ff00
+    color:0x00ff00,
+
+    roughness:0.6,
+
+    metalness:0.1
 
 });
 
@@ -111,6 +115,50 @@ cubo.position.y = 1;
 
 escena.add(
     cubo
+);
+
+// ILUMINACIÓN
+
+const luzAmbiente =
+new THREE.HemisphereLight(
+
+    0xffffff,
+
+    0x444444,
+
+    2
+
+);
+
+escena.add(
+    luzAmbiente
+);
+
+
+
+const luzDireccion =
+new THREE.DirectionalLight(
+
+    0xffffff,
+
+    3
+
+);
+
+
+luzDireccion.position.set(
+
+    5,
+
+    5,
+
+    5
+
+);
+
+
+escena.add(
+    luzDireccion
 );
 
 cubo.position.set(
