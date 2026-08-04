@@ -3,39 +3,70 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Orvack Poser</title>
+    <title>Orvack Poser</title>
 
-<link rel="stylesheet" href="style.css">
+    <!-- ICONO DE LA WEB -->
+    <link rel="icon" type="image/png" href="icono.png">
 
 
-<script type="importmap">
-{
-    "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-    }
-}
-</script>
+    <style>
+
+        body {
+
+            margin: 0;
+
+            overflow: hidden;
+
+            background: #202020;
+
+        }
+
+
+        #visor3D {
+
+            width: 100vw;
+
+            height: 100vh;
+
+            display: block;
+
+        }
+
+
+        #archivoGLB {
+
+            position: fixed;
+
+            top: 10px;
+
+            left: 10px;
+
+            z-index: 10;
+
+            background: white;
+
+            padding: 5px;
+
+        }
+
+    </style>
+
 
 </head>
 
 
+
 <body>
-
-
-<div id="interfaz">
 
 
 <input 
 type="file"
 id="archivoGLB"
 accept=".glb,.gltf">
-
-
-</div>
 
 
 
@@ -47,6 +78,7 @@ accept=".glb,.gltf">
 type="module" 
 src="script.js">
 </script>
+
 
 
 </body>
