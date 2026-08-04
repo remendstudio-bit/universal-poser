@@ -715,7 +715,10 @@ function deshacer(){
 
 
     const estado =
-    historial.pop();
+historial[historial.length - 1];
+
+
+historial.pop();
 
 
 
@@ -1245,6 +1248,12 @@ canvas.addEventListener(
 
 ()=>{
 
+
+    if(arrastrando || moviendoModelo){
+
+    guardarEstado();
+
+    }
 
     arrastrando = false;
 
