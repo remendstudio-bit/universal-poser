@@ -21,9 +21,18 @@ new GLTFLoader();
 
 let modeloActual = null;
 
+let huesoSeleccionado = null;
+
+let puntoSeleccionado = null;
+
 let puntosHuesos = [];
 
 let huesosUsables = [];
+
+
+let huesoSeleccionado = null;
+let puntoSeleccionado = null;
+
 
 const inputGLB =
 document.getElementById(
@@ -518,86 +527,184 @@ error
 
 // ANIMACIÓN
 
-
 function animar(){
 
-requestAnimationFrame(
-    animar
-);
+    requestAnimationFrame(
+        animar
+    );
 
 
-actualizarPuntos();
+    actualizarPuntos();
 
 
-
-controles.update();
-
+    controles.update();
 
 
-render.render(
+    render.render(
 
-escena,
+        escena,
 
-camara
+        camara
 
-);
+    );
 
 }
+
+
+
+// ACTUALIZAR POSICIÓN DE PUNTOS
 
 function actualizarPuntos(){
 
 
-if(!modeloActual) return;
+    if(!modeloActual) return;
 
 
 
-modeloActual.updateMatrixWorld(
-    true
-);
+    modeloActual.updateMatrixWorld(
+        true
+    );
 
 
 
-puntosHuesos.forEach(
+    puntosHuesos.forEach(
 
-(punto)=>{
-
-
-const posicion =
-new THREE.Vector3();
+        (punto)=>{
 
 
-
-punto.userData.hueso.getWorldPosition(
-
-posicion
-
-);
+            const posicion =
+            new THREE.Vector3();
 
 
 
-punto.position.copy(
-    posicion
-);
+            punto.userData.hueso.getWorldPosition(
+
+                posicion
+
+            );
+
+
+
+            punto.position.copy(
+                posicion
+            );
+
+
+        }
+
+    );
 
 
 }
 
-);
 
 
-}
+// SELECCIÓN DE HUESOS
+
+const raycaster =
+new THREE.Raycaster();
 
 
+const mouse =
+new THREE.Vector2();
+
+
+
+canvas.addEventListener(
+
+"pointerdown",
+
+(evento)=>{
+
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+
+
+    mouse.x =
+    ((evento.clientX - rect.left) /
+    rect.width) * 2 - 1;
+
+
+
+    mouse.y =
+    -((evento.clientY - rect.top) /
+    rect.height) * 2 + 1;
+
+
+
+    raycaster.setFromCamera(
+
+        mouse,
+
+        camara
+
+    );
+
+
+
+    const impactos =
+    raycaster.intersectObjects(
+        puntosHuesos
+    );
+
+
+
+    if(impactos.length > 0){
+
+
+        const punto =
+        impactos[0].object;
+
+
+
+        if(puntoSeleccionado){
+
+            puntoSeleccionado.material.color.set(
+                0xff3333
+            );
+
+        }
+
+
+
+        punto.material.color.set(
+            0x00ff00
+        );
+
+
+
+        puntoSeleccionado =
+        punto;
+
+
+
+        huesoSeleccionado =
+        punto.userData.hueso;
+
+
+
+        console.log(
+            "Hueso seleccionado:",
+            huesoSeleccionado.name
+        );
+
+
+    }
+
+
+});
+
+
+
+// INICIAR PROGRAMA
 
 animar();
 
 
 
-
-
-
 // RESIZE
-
 
 window.addEventListener(
 
@@ -606,25 +713,22 @@ window.addEventListener(
 ()=>{
 
 
-camara.aspect =
-
-window.innerWidth /
-
-window.innerHeight;
+    camara.aspect =
+    window.innerWidth /
+    window.innerHeight;
 
 
-
-camara.updateProjectionMatrix();
+    camara.updateProjectionMatrix();
 
 
 
-render.setSize(
+    render.setSize(
 
-window.innerWidth,
+        window.innerWidth,
 
-window.innerHeight
+        window.innerHeight
 
-);
+    );
 
 
 }
