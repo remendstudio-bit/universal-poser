@@ -275,6 +275,18 @@ escena.add(
 );
 
 
+const presentacion =
+document.getElementById(
+    "pantallaInicio"
+);
+
+
+if(presentacion){
+
+    presentacion.style.display="none";
+
+}
+
 // BUSCAR HUESOS
 
 let huesosEncontrados = [];
