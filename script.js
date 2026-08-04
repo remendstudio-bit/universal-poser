@@ -383,6 +383,20 @@ punto
 }
 
 
+huesosUsables.forEach(
+
+(hueso)=>{
+
+
+crearPunto(
+    hueso
+);
+
+
+}
+
+);
+
 
 
 // MEDIR MODELO
@@ -413,26 +427,6 @@ caja.getSize(
 
 modeloActual.position.sub(
     centro
-);
-
-
-modeloActual.updateMatrixWorld(
-    true
-);
-
-
-huesosUsables.forEach(
-
-(hueso)=>{
-
-
-crearPunto(
-    hueso
-);
-
-
-}
-
 );
 
 
