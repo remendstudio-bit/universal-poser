@@ -622,7 +622,7 @@ function crearControlesRotacion(hueso){
     eliminarControlesRotacion();
 
 
-const tamaño = 0.5;
+const tamaño = 1.0;
 
 
 
@@ -645,7 +645,7 @@ new THREE.TorusGeometry(
 
 tamaño,
 
-0.01,
+0.03,
 
 16,
 
@@ -811,58 +811,95 @@ canvas.addEventListener(
     );
 
 
+    const impactosCirculos =
+raycaster.intersectObjects(
+    controlesRotacion
+);
+
 
     if(impactos.length > 0){
 
 
-        const punto =
-        impactos[0].object;
+    const punto =
+    impactos[0].object;
 
 
 
-        if(puntoSeleccionado){
+    if(puntoSeleccionado){
 
-            puntoSeleccionado.material.color.set(
-                0xff3333
-            );
-
-        }
-
-
-
-        punto.material.color.set(
-            0x00ff00
+        puntoSeleccionado.material.color.set(
+            0xff3333
         );
-
-
-
-        puntoSeleccionado =
-        punto;
-
-
-
-        huesoSeleccionado =
-punto.userData.hueso;
-
-
-
-console.log(
-    "Hueso seleccionado:",
-    huesoSeleccionado.name
-);
-
-
-
-crearControlesRotacion(
-    huesoSeleccionado
-);
-
 
     }
 
 
-});
 
+    punto.material.color.set(
+        0x00ff00
+    );
+
+
+
+    puntoSeleccionado =
+    punto;
+
+
+
+    huesoSeleccionado =
+    punto.userData.hueso;
+
+
+
+    console.log(
+        "Hueso seleccionado:",
+        huesoSeleccionado.name
+    );
+
+
+
+    crearControlesRotacion(
+        huesoSeleccionado
+    );
+
+
+
+}
+
+
+
+if(impactosCirculos.length > 0){
+
+
+    ejeSeleccionado =
+    impactosCirculos[0].object.userData.eje;
+
+
+
+    arrastrando = true;
+
+
+
+    ultimoX =
+    evento.clientX;
+
+
+
+    ultimoY =
+    evento.clientY;
+
+
+
+    console.log(
+        "Eje seleccionado:",
+        ejeSeleccionado
+    );
+
+
+}
+
+
+});
 
 
 // INICIAR PROGRAMA
