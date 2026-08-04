@@ -61,33 +61,39 @@
 
 
 
-        /* PANTALLA INICIAL */
+        /* PRESENTACIÓN */
 
         #pantallaInicio {
 
             position:fixed;
 
-            top:0;
+            top:20px;
 
-            left:0;
-
-            width:100%;
-
-            height:100%;
-
-            background:#202020;
+            left:20px;
 
             z-index:100;
 
-            display:flex;
+            background:rgba(30,30,30,0.85);
 
-            flex-direction:column;
+            padding:15px 20px;
 
-            align-items:center;
-
-            justify-content:center;
+            border-radius:14px;
 
             color:white;
+
+            backdrop-filter:blur(5px);
+
+        }
+
+
+
+        #pantallaInicio .logo {
+
+            font-size:40px;
+
+            text-align:center;
+
+            margin-bottom:5px;
 
         }
 
@@ -95,11 +101,11 @@
 
         #pantallaInicio h1 {
 
-            font-size:42px;
-
             margin:0;
 
-            letter-spacing:3px;
+            font-size:24px;
+
+            letter-spacing:2px;
 
         }
 
@@ -107,7 +113,9 @@
 
         #pantallaInicio p {
 
-            font-size:18px;
+            margin:5px 0;
+
+            font-size:15px;
 
             opacity:0.8;
 
@@ -115,35 +123,9 @@
 
 
 
-        #botonInicio {
-
-            margin-top:30px;
-
-            width:150px;
-
-            height:50px;
-
-            border:none;
-
-            border-radius:25px;
-
-            background:#333;
-
-            color:white;
-
-            font-size:20px;
-
-            cursor:pointer;
-
-        }
-
-
-
         #pantallaInicio span {
 
-            margin-top:40px;
-
-            text-align:center;
+            font-size:13px;
 
             opacity:0.6;
 
@@ -227,21 +209,25 @@
 <div id="pantallaInicio">
 
 
+    <div class="logo">
+
+        🐊
+
+    </div>
+
+
     <h1>
+
         UNIVERSAL POSER
+
     </h1>
 
 
     <p>
+
         3D Character Posing Tool
+
     </p>
-
-
-    <button id="botonInicio">
-
-        ▶ Iniciar
-
-    </button>
 
 
     <span>
