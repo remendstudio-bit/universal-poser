@@ -589,39 +589,6 @@ punto.position.copy(
 
 
 
-
-
-// ANIMACIÓN
-
-
-function animar(){
-
-requestAnimationFrame(
-    animar
-);
-
-
-
-actualizarPuntos();
-
-
-
-controles.update();
-
-
-
-render.render(
-
-escena,
-
-camara
-
-);
-
-
-}
-
-
 animar();
 
 
