@@ -367,6 +367,11 @@ punto
 );
 
 
+console.log(
+"Creando punto:",
+hueso.name
+);
+
 
 puntosHuesos.push(
 punto
