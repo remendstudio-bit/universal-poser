@@ -333,17 +333,35 @@ huesosUsables.length
 function crearPunto(hueso){
 
 
+let tamañoPunto = 0.12;
+
+const nombre =
+hueso.name.toLowerCase();
+
+if(
+
+nombre.includes("distal") ||
+
+nombre.includes("intermediate") ||
+
+nombre.includes("proximal")
+
+){
+
+tamañoPunto = 0.08;
+
+}
+
 const geometria =
 new THREE.SphereGeometry(
 
-0.08,
+tamañoPunto,
 
 16,
 
 16
 
 );
-
 
 
 const material =
@@ -677,6 +695,57 @@ material
 
 
 
+const geometriaTouch =
+new THREE.TorusGeometry(
+
+tamaño,
+
+0.12,
+
+16,
+
+64
+
+);
+
+const materialTouch =
+new THREE.MeshBasicMaterial({
+
+transparent:true,
+
+opacity:0
+
+});
+
+const touch =
+new THREE.Mesh(
+
+geometriaTouch,
+
+materialTouch
+
+);
+
+touch.rotation.copy(
+circulo.rotation
+);
+
+touch.userData.eje =
+i;
+
+touch.userData.visible =
+circulo;
+
+escena.add(
+touch
+);
+
+controlesRotacion.push(
+touch
+);
+
+
+
 circulo.renderOrder = 1000;
 
 
@@ -744,16 +813,17 @@ posicion
 
 controlesRotacion.forEach(
 
-(circulo)=>{
+(touch)=>{
 
-
-circulo.position.copy(
+touch.position.copy(
 posicion
 );
 
+touch.userData.visible.position.copy(
+posicion
+);
 
 }
-
 );
 
 
