@@ -652,16 +652,41 @@ function guardarEstado(){
     if(!modeloActual) return;
 
 
+
     const estado = {
 
 
         posicion: modeloActual.position.clone(),
 
 
-        rotacion: modeloActual.rotation.clone()
+        rotacion: modeloActual.rotation.clone(),
+
+
+        huesos: []
 
 
     };
+
+
+
+    huesosUsables.forEach(
+
+        (hueso)=>{
+
+
+            estado.huesos.push({
+
+                hueso:hueso,
+
+                rotacion:hueso.rotation.clone()
+
+            });
+
+
+        }
+
+    );
+
 
 
     historial.push(estado);
@@ -695,12 +720,35 @@ function deshacer(){
 
 
     modeloActual.position.copy(
+
         estado.posicion
+
     );
 
 
+
     modeloActual.rotation.copy(
+
         estado.rotacion
+
+    );
+
+
+
+    estado.huesos.forEach(
+
+        (dato)=>{
+
+
+            dato.hueso.rotation.copy(
+
+                dato.rotacion
+
+            );
+
+
+        }
+
     );
 
 
