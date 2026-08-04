@@ -928,18 +928,21 @@ canvas.addEventListener(
     if(modoMover){
 
 
-        moviendoModelo = true;
+    guardarEstado();
 
 
-        ultimoMoverX = evento.clientX;
+    moviendoModelo = true;
 
 
-        ultimoMoverY = evento.clientY;
+    ultimoMoverX = evento.clientX;
 
 
-        return;
+    ultimoMoverY = evento.clientY;
 
-    }
+
+    return;
+
+}
 
 
 
@@ -1021,6 +1024,8 @@ raycaster.intersectObjects(
     punto.userData.hueso;
 
 
+    guardarEstado();
+        
 
     console.log(
         "Hueso seleccionado:",
@@ -1028,7 +1033,7 @@ raycaster.intersectObjects(
     );
 
 
-
+        
     crearControlesRotacion(
         huesoSeleccionado
     );
