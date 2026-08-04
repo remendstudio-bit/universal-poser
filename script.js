@@ -21,13 +21,13 @@ new GLTFLoader();
 
 let modeloActual = null;
 
-let huesoSeleccionado = null;
-
-let puntoSeleccionado = null;
-
 let puntosHuesos = [];
 
 let huesosUsables = [];
+
+let huesoSeleccionado = null;
+
+let puntoSeleccionado = null;
 
 
 const inputGLB =
