@@ -352,6 +352,8 @@ material
 );
 
 
+punto.frustumCulled = false;
+
 
 punto.renderOrder = 999;
 
@@ -542,6 +544,16 @@ camara
 function actualizarPuntos(){
 
 
+if(!modeloActual) return;
+
+
+
+modeloActual.updateMatrixWorld(
+    true
+);
+
+
+
 puntosHuesos.forEach(
 
 (punto)=>{
@@ -551,6 +563,7 @@ const posicion =
 new THREE.Vector3();
 
 
+
 punto.userData.hueso.getWorldPosition(
 
 posicion
@@ -558,9 +571,11 @@ posicion
 );
 
 
+
 punto.position.copy(
-posicion
+    posicion
 );
+
 
 
 }
