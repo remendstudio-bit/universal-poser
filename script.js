@@ -214,7 +214,7 @@ escena.add(
 
 // BUSCAR HUESOS
 
-let cantidadHuesos = 0;
+let huesosEncontrados = [];
 
 
 modeloActual.traverse(
@@ -227,8 +227,27 @@ objeto.isSkinnedMesh &&
 objeto.skeleton
 ){
 
-cantidadHuesos +=
-objeto.skeleton.bones.length;
+
+objeto.skeleton.bones.forEach(
+
+(hueso)=>{
+
+
+if(
+!huesosEncontrados.includes(hueso)
+){
+
+huesosEncontrados.push(
+hueso
+);
+
+}
+
+
+}
+
+);
+
 
 }
 
@@ -240,8 +259,11 @@ objeto.skeleton.bones.length;
 
 
 console.log(
-"Huesos encontrados:",
-cantidadHuesos
+
+"Huesos reales:",
+
+huesosEncontrados.length
+
 );
 
 
