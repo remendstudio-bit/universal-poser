@@ -21,6 +21,9 @@ new GLTFLoader();
 
 let modeloActual = null;
 
+let puntosHuesos = [];
+
+let huesosUsables = [];
 
 const inputGLB =
 document.getElementById(
@@ -266,6 +269,126 @@ huesosEncontrados.length
 
 );
 
+huesosUsables = [];
+
+
+huesosEncontrados.forEach(
+
+(hueso)=>{
+
+
+const nombre =
+hueso.name.toLowerCase();
+
+
+
+if(
+
+!nombre.includes("mixamorig") &&
+
+!nombre.includes("helper") &&
+
+!nombre.includes("twist")
+
+){
+
+
+huesosUsables.push(
+hueso
+);
+
+
+}
+
+
+}
+
+);
+
+
+
+console.log(
+
+"Huesos para puntos:",
+
+huesosUsables.length
+
+);
+
+function crearPunto(hueso){
+
+
+const geometria =
+new THREE.SphereGeometry(
+
+0.035,
+
+16,
+
+16
+
+);
+
+
+
+const material =
+new THREE.MeshBasicMaterial({
+
+color:0xff3333,
+
+depthTest:false
+
+});
+
+
+
+const punto =
+new THREE.Mesh(
+
+geometria,
+
+material
+
+);
+
+
+
+punto.renderOrder = 999;
+
+
+
+punto.userData.hueso =
+hueso;
+
+
+
+escena.add(
+punto
+);
+
+
+
+puntosHuesos.push(
+punto
+);
+
+
+}
+
+
+huesosUsables.forEach(
+
+(hueso)=>{
+
+
+crearPunto(
+    hueso
+);
+
+
+}
+
+);
 
 // MEDIR MODELO
 
@@ -395,23 +518,46 @@ requestAnimationFrame(
 
 
 
+
 controles.update();
 
 
 
 render.render(
 
-    escena,
+escena,
 
-    camara
+camara
 
 );
 
 
 }
 
+function actualizarPuntos(){
+
+
+puntosHuesos.forEach(
+
+(punto)=>{
+
+
+punto.userData.hueso.getWorldPosition(
+
+punto.position
+
+);
+
+
+}
+
+);
+
+
+}
 
 animar();
+
 
 
 
