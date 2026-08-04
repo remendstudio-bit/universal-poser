@@ -53,6 +53,8 @@ let historial = [];
 
 let limiteHistorial = 30;
 
+let poseInicial = null;
+
 let camaraBloqueada = false;
 
 let ultimoMovimientoX = 0;
@@ -158,6 +160,13 @@ const botonDeshacer =
 document.getElementById(
     "botonDeshacer"
 );
+
+
+const botonReset =
+document.getElementById(
+    "botonReset"
+);
+
 
 controles.enableDamping = true;
 
@@ -559,6 +568,8 @@ console.log(
 modeloActual.name
 );
 
+    
+guardarPoseInicial();
 
 
 },
@@ -698,6 +709,106 @@ function guardarEstado(){
         historial.shift();
 
     }
+
+
+}
+
+
+function guardarEstado(){
+
+
+    // todo tu código de guardarEstado
+
+
+}
+
+
+
+function guardarPoseInicial(){
+
+
+    if(!modeloActual) return;
+
+
+
+    poseInicial = {
+
+
+        posicion:
+        modeloActual.position.clone(),
+
+
+        rotacion:
+        modeloActual.rotation.clone(),
+
+
+        huesos:[]
+
+
+    };
+
+
+
+    huesosUsables.forEach(
+
+        (hueso)=>{
+
+
+            poseInicial.huesos.push({
+
+                hueso:hueso,
+
+                rotacion:
+                hueso.rotation.clone()
+
+            });
+
+
+        }
+
+    );
+
+
+}
+
+
+function resetPose(){
+
+
+    if(!poseInicial) return;
+
+
+
+    modeloActual.position.copy(
+
+        poseInicial.posicion
+
+    );
+
+
+    modeloActual.rotation.copy(
+
+        poseInicial.rotacion
+
+    );
+
+
+
+    poseInicial.huesos.forEach(
+
+        (dato)=>{
+
+
+            dato.hueso.rotation.copy(
+
+                dato.rotacion
+
+            );
+
+
+        }
+
+    );
 
 
 }
@@ -1366,6 +1477,18 @@ botonDeshacer.addEventListener(
 
 );
 
+
+botonReset.addEventListener(
+
+"click",
+
+()=>{
+
+    resetPose();
+
+}
+
+);
 
 
 // INICIAR PROGRAMA
