@@ -41,6 +41,11 @@ let ultimoY = 0;
 
 let camaraBloqueada = false;
 
+let modoMover = false;
+
+let ultimoMovimientoX = 0;
+
+let ultimoMovimientoY = 0;
 
 const inputGLB =
 document.getElementById(
@@ -128,6 +133,11 @@ new OrbitControls(
 const botonCamara =
 document.getElementById(
     "botonCamara"
+);
+
+const botonMover =
+document.getElementById(
+    "botonMover"
 );
 
 controles.enableDamping = true;
@@ -1070,6 +1080,53 @@ botonCamara.textContent =
 
 );
 
+botonMover.addEventListener(
+
+"click",
+
+()=>{
+
+
+modoMover =
+!modoMover;
+
+
+
+if(modoMover){
+
+
+    controles.enabled = false;
+
+
+    botonMover.textContent = "✥";
+
+
+    console.log(
+        "Modo mover activado"
+    );
+
+
+}else{
+
+
+    if(!camaraBloqueada){
+
+        controles.enabled = true;
+
+    }
+
+
+    console.log(
+        "Modo mover desactivado"
+    );
+
+
+}
+
+
+}
+
+);
 
 
 // INICIAR PROGRAMA
