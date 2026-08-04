@@ -636,126 +636,137 @@ function eliminarControlesRotacion(){
 
 function crearControlesRotacion(hueso){
 
-
     eliminarControlesRotacion();
 
+    const tamaño = 1.0;
 
-const tamaño = 1.0;
+    const colores = [
 
+        0xff0000,
 
+        0x00ff00,
 
-const colores = [
+        0x0000ff
 
-0xff0000,
+    ];
 
-0x00ff00,
+    for(let i = 0; i < 3; i++){
 
-0x0000ff
+        // CÍRCULO VISIBLE
 
-];
+        const geometria =
+        new THREE.TorusGeometry(
 
+            tamaño,
 
-for(let i = 0; i < 3; i++){
+            0.03,
 
+            16,
 
-const geometria =
-new THREE.TorusGeometry(
+            64
 
-tamaño,
+        );
 
-0.03,
+        const material =
+        new THREE.MeshBasicMaterial({
 
-16,
+            color: colores[i],
 
-64
+            depthTest:false
 
-);
+        });
 
+        const circulo =
+        new THREE.Mesh(
 
+            geometria,
 
-const material =
-new THREE.MeshBasicMaterial({
+            material
 
-color: colores[i],
+        );
 
-depthTest:false
+        circulo.renderOrder = 1000;
 
-});
+        circulo.userData.eje = i;
 
+        // ORIENTACIÓN DEL CÍRCULO
 
+        if(i === 0){
 
-const circulo =
-new THREE.Mesh(
+            circulo.rotation.y = Math.PI / 2;
 
-geometria,
+        }
 
-material
+        if(i === 1){
 
-);
+            circulo.rotation.x = Math.PI / 2;
 
+        }
 
+        // ÁREA TÁCTIL (INVISIBLE)
 
-const geometriaTouch =
-new THREE.TorusGeometry(
+        const geometriaTouch =
+        new THREE.TorusGeometry(
 
-tamaño,
+            tamaño,
 
-0.12,
+            0.12,
 
-16,
+            16,
 
-64
+            64
 
-);
+        );
 
-const materialTouch =
-new THREE.MeshBasicMaterial({
+        const materialTouch =
+        new THREE.MeshBasicMaterial({
 
-transparent:true,
+            transparent:true,
 
-opacity:0
+            opacity:0
 
-});
+        });
 
-const touch =
-new THREE.Mesh(
+        const touch =
+        new THREE.Mesh(
 
-geometriaTouch,
+            geometriaTouch,
 
-materialTouch
+            materialTouch
 
-);
+        );
 
-touch.rotation.copy(
-circulo.rotation
-);
+        // COPIAR LA MISMA ORIENTACIÓN
 
-touch.userData.eje =
-i;
+        touch.rotation.copy(
+            circulo.rotation
+        );
 
-touch.userData.visible =
-circulo;
+        touch.userData.eje = i;
 
-escena.add(
-touch
-);
+        touch.userData.visible = circulo;
 
-controlesRotacion.push(
-touch
-);
+        // AGREGAR AMBOS A LA ESCENA
 
+        escena.add(
+            circulo
+        );
 
+        escena.add(
+            touch
+        );
 
-circulo.renderOrder = 1000;
+        // SOLO EL INVISIBLE SE USA PARA DETECTAR TOQUES
 
+        controlesRotacion.push(
+            touch
+        );
 
-circulo.userData.eje = i;
+    }
 
-
-if(i === 0){
-
-circulo.rotation.y =
-Math.PI / 2;
+    actualizarControlesRotacion(
+        hueso
+    );
 
 }
 
