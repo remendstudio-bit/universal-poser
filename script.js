@@ -950,21 +950,21 @@ switch(ejeSeleccionado){
 
 case 0:
 
-console.log("Moviendo eje X");
+huesoSeleccionado.rotation.x += deltaX * 0.01;
 
 break;
 
 
 case 1:
 
-console.log("Moviendo eje Y");
+huesoSeleccionado.rotation.y += deltaX * 0.01;
 
 break;
 
 
 case 2:
 
-console.log("Moviendo eje Z");
+huesoSeleccionado.rotation.z += deltaX * 0.01;
 
 break;
 
