@@ -48,6 +48,11 @@ let ultimoMoverX = 0;
 
 let ultimoMoverY = 0;
 
+
+let historial = [];
+
+let limiteHistorial = 30;
+
 let camaraBloqueada = false;
 
 let ultimoMovimientoX = 0;
@@ -142,9 +147,16 @@ document.getElementById(
     "botonCamara"
 );
 
+
 const botonMover =
 document.getElementById(
     "botonMover"
+);
+
+
+const botonDeshacer =
+document.getElementById(
+    "botonDeshacer"
 );
 
 controles.enableDamping = true;
@@ -629,6 +641,67 @@ function actualizarPuntos(){
 
 
     });
+
+
+}
+
+
+function guardarEstado(){
+
+
+    if(!modeloActual) return;
+
+
+    const estado = {
+
+
+        posicion: modeloActual.position.clone(),
+
+
+        rotacion: modeloActual.rotation.clone()
+
+
+    };
+
+
+    historial.push(estado);
+
+
+
+    if(historial.length > limiteHistorial){
+
+        historial.shift();
+
+    }
+
+
+}
+
+
+function deshacer(){
+
+
+    if(historial.length === 0){
+
+        return;
+
+    }
+
+
+
+    const estado =
+    historial.pop();
+
+
+
+    modeloActual.position.copy(
+        estado.posicion
+    );
+
+
+    modeloActual.rotation.copy(
+        estado.rotacion
+    );
 
 
 }
@@ -1217,6 +1290,20 @@ botonMover.addEventListener(
 }
 
 );
+
+
+botonDeshacer.addEventListener(
+
+"click",
+
+()=>{
+
+    deshacer();
+
+}
+
+);
+
 
 
 // INICIAR PROGRAMA
