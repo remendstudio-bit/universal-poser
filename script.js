@@ -212,7 +212,7 @@ escena.add(
 );
 
 
-    // BUSCAR HUESOS
+// BUSCAR HUESOS
 
 let cantidadHuesos = 0;
 
@@ -227,16 +227,13 @@ objeto.isSkinnedMesh &&
 objeto.skeleton
 ){
 
-
 cantidadHuesos +=
 objeto.skeleton.bones.length;
 
-
 }
 
 
 }
-
 
 );
 
