@@ -43,8 +43,6 @@ let ultimoY = 0;
 
 let camaraBloqueada = false;
 
-let modoMover = false;
-
 let ultimoMovimientoX = 0;
 
 let ultimoMovimientoY = 0;
